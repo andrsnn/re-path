@@ -1,3 +1,5 @@
 node_modules
 node_modules/*
+tests/test-project
+tests/test-project/*
 .DS_Store
