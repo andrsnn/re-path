@@ -3,10 +3,23 @@
 var path = require('path');
 var glob = require('glob');
 var async = require('async');
+var program = require('commander');
+var _ = require('lodash');
 var RePath = require('./lib/RePath');
 var PathStore = RePath.PathStore;
 
-var absoluteRoot = path.resolve(__dirname, process.argv[2]);
+program
+    .version('0.0.1')
+    .option('-c, --cwd [value]', 'Current working directory.')
+    .option('-am, --autoMemoise', 'Automatically replace with matching memoised paths.')
+    .option('-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to replace.', parseInt)
+    .parse(process.argv);
+
+if (!program.cwd) {
+    throw new Error('No cwd specified.');
+}
+
+var absoluteRoot = path.resolve(__dirname, program.cwd);
 
 var pathStore = new PathStore();
 var rePath = new RePath(absoluteRoot);
@@ -38,7 +51,7 @@ rePath.resolvePathsInFiles(
 	function (regexResult, absPathToCurrentFile, callback) {
 		var match = regexResult[1];
 
-        var memoisedMatches = pathStore.lookup(match);
+        var memoisedMatches = pathStore.lookup(match, program.threshold);
 
 		console.log('-------------------------------------------');
 		console.log('Current File: ' + absPathToCurrentFile);
@@ -46,6 +59,18 @@ rePath.resolvePathsInFiles(
 		console.log('-------------------------------------------');
 
         if (memoisedMatches.length !== 0) {
+            if (program.autoMemoise) {
+                var firstMatch = _.first(memoisedMatches);
+
+                var relativeNewPath = rePath.utils.resolvePathToFile(absPathToCurrentFile, firstMatch);
+
+                var transformedLine = rePath.utils.replacePath(regexResult, relativeNewPath);
+
+                console.log('Auto resolved to: ' + firstMatch);
+
+                return callback(null, transformedLine);
+            }
+
             rePath.utils.promptList(memoisedMatches, function (err, selectedPath) {
                 if (selectedPath === 'None') {
                     return promptForNewFile(regexResult, absPathToCurrentFile, callback);
@@ -67,7 +92,5 @@ rePath.resolvePathsInFiles(
 		console.log('Number of files iterated: ' + numFilesChanged);
 
 		console.log(matchingFiles);
-
-        console.log(pathStore._store);
 	}
 );
