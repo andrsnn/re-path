@@ -4,7 +4,7 @@ Utility to assit with maintaining nested project dependencies.
 
 Provides a cli tool and programmatic API.
 
-Given a working directory this utility will match files via a glob expression.  Matching files will be parsed, and internal paths will be resolved. If a path is not resolved, the cli will prompt for a new matching path and the file will be rewritten.  Non resolved paths can be memoised with a matching path and files can be automatically rewritten.
+Given a working directory this utility will match files via a glob expression.  Matching files will be parsed, and internal paths will be resolved. If a path is not resolved to a matching file, the cli will prompt for a new matching path and the file will be rewritten.  Non resolved paths can be memoised with a matching path and files can be automatically rewritten.
 
 ### Cli options:
 `'-c, --cwd [value]', 'Current working directory.'`
