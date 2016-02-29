@@ -18,9 +18,14 @@ Given a working directory this utility will match files via a glob expression.  
 Memoised matches are computed by evaluating number of correct matching subdirectories starting will file and traversing toward the root. 
 E.g. given '../moduleB/moduleB' with memoised path '/User/andrsnn/re-path/moduleB/moduleB' will produce a match of 2.
 
+tests/template-project is used as a example project directory with unresolved paths. Running `npm test` currently will produce a copy of this directory.
+
 ### Current caveats:
 * Assumes module dependencies are placed on new lines.
 * Currently only supports unix based operating system pathing.
+
+### To do:
+* Needs tests.
 
 See https://www.npmjs.com/package/glob and https://www.npmjs.com/package/minimatch for more on pattern matching.
 
