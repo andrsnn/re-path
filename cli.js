@@ -9,7 +9,6 @@ var RePath = require('./lib/RePath');
 var PathStore = RePath.PathStore;
 
 program
-    .version('0.0.1')
     .option('-c, --cwd [value]', 'Current working directory.')
     .option('-am, --autoMemoise', 'Automatically replace with matching memoised paths.')
     .option('-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to replace.', parseInt)
