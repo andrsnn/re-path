@@ -19,6 +19,6 @@
   "main": "lib/RePath.js",
   "preferGlobal": "true",
   "bin": {
-    "filesearch" : "cli.js"
+    "re-path" : "cli.js"
   }
 }
