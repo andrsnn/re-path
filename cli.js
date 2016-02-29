@@ -1,7 +1,6 @@
 'use strict';
-//node main.js <pathToRoot>
+
 var path = require('path');
-var glob = require('glob');
 var async = require('async');
 var program = require('commander');
 var _ = require('lodash');
@@ -10,6 +9,7 @@ var PathStore = RePath.PathStore;
 
 program
     .option('-c, --cwd [value]', 'Current working directory.')
+    .option('-g, --glob [value]', 'Glob on which to match on, see npm glob')
     .option('-am, --autoMemoise', 'Automatically replace with matching memoised paths.')
     .option('-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to replace.', parseInt)
     .parse(process.argv);
@@ -17,6 +17,8 @@ program
 if (!program.cwd) {
     throw new Error('No cwd specified.');
 }
+
+var glob = program.glob || '**/*.js';
 
 var absoluteRoot = path.resolve(__dirname, program.cwd);
 
@@ -46,7 +48,7 @@ function promptForNewFile(regexResult, absPathToCurrentFile, callback) {
 }
 
 rePath.resolvePathsInFiles(
-	'**/*.js',
+	glob,
 	function (regexResult, absPathToCurrentFile, callback) {
 		var match = regexResult[1];
 
