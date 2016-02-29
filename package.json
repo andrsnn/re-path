@@ -16,5 +16,5 @@
     "lodash": "^4.5.1",
     "shelljs": "^0.6.0"
   },
-  "main": "lib/RePath.js",
+  "main": "lib/RePath.js"
 }
