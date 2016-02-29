@@ -10,8 +10,8 @@ var PathStore = RePath.PathStore;
 program
     .option('-c, --cwd [value]', 'Current working directory.')
     .option('-g, --glob [value]', 'Glob on which to match on, see npm glob')
-    .option('-am, --autoMemoise', 'Automatically replace with matching memoised paths.')
-    .option('-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to match. Defaults to 1.', parseInt)
+    .option('-a, --auto', 'Automatically replace with matching memoised paths.')
+    .option('-t, --threshold <n>', 'If auto enabled, threshold in which to match. Defaults to 1.', parseInt)
     .parse(process.argv);
 
 if (!program.cwd) {
@@ -60,7 +60,7 @@ rePath.resolvePathsInFiles(
 		console.log('-------------------------------------------');
 
         if (memoisedMatches.length !== 0) {
-            if (program.autoMemoise) {
+            if (program.auto) {
                 var firstMatch = _.first(memoisedMatches);
 
                 var relativeNewPath = rePath.utils.resolvePathToFile(absPathToCurrentFile, firstMatch);
