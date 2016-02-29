@@ -11,7 +11,7 @@ program
     .option('-c, --cwd [value]', 'Current working directory.')
     .option('-g, --glob [value]', 'Glob on which to match on, see npm glob')
     .option('-am, --autoMemoise', 'Automatically replace with matching memoised paths.')
-    .option('-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to match. Defaults to 0.', parseInt)
+    .option('-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to match. Defaults to 1.', parseInt)
     .parse(process.argv);
 
 if (!program.cwd) {

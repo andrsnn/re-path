@@ -13,7 +13,7 @@ Given a working directory this utility will match files via a glob expression.  
 
 `'-am, --autoMemoise', 'Automatically replace with matching memoised paths.'`
 
-`'-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to match. Defaults to 0.'`
+`'-t, --threshold <n>', 'If autoMemoised enabled, threshold in which to match. Defaults to 1.'`
 
 Memoised matches are computed by evaluating number of correct matching subdirectories starting will file and traversing toward the root. 
 E.g. given `'../moduleB/moduleB'` with memoised path `'/User/andrsnn/re-path/moduleB/moduleB'` will produce a match of 2.  Given a threshold greater than 2 will mean module path will not be automatically rewritten, and a new path will be prompted for.
