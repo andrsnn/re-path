@@ -31,7 +31,10 @@ function promptForNewFile(regexResult, absPathToCurrentFile, callback) {
         function (newPath, callback) {
             var absNewPath = rePath.utils.resolvePathFromFile(absPathToCurrentFile, newPath);
 
-            rePath.isFileAtPath(absNewPath, function (isFileAtPath) {
+            rePath.isFileAtPath(absNewPath, function (err, isFileAtPath) {
+                if (err) {
+                    return callback(err);
+                }
                 return callback(null, isFileAtPath, newPath, absNewPath);
             });
         },
