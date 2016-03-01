@@ -1,6 +1,6 @@
 # re-path
 
-Utility to assit with maintaining nested project dependencies.
+Utility to assit with maintaining nested project dependencies. Move modules and files around your project at will, and this module will rewrite broken file paths.
 
 Install cli globally via `npm install -g https://github.com/andrsnn/re-path` and use via `re-path -cwd ~/git`.
 

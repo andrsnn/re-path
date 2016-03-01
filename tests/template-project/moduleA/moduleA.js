@@ -8,5 +8,6 @@ var moduleG = require('../moduleB/moduleB/moduleB');
 var moduleH = require("../moduleB/moduleB.someBadExtension");
 
 var moduleI = require('./moduleC');
+var moduleJ = require('./moduleC');
 
 module.exports = {};
