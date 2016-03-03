@@ -47,7 +47,7 @@ function promptForNewFile(regexResult, absPathToCurrentFile, callback) {
                 return callback(null, regexResult.input);
             }
 
-            pathStore.memoise(absNewPath);
+            pathStore.memoise(regexResult[1], absNewPath);
 
             var transformedLine = rePath.utils.replacePath(regexResult, newPath);
             return callback(null, transformedLine);
@@ -56,16 +56,16 @@ function promptForNewFile(regexResult, absPathToCurrentFile, callback) {
 }
 
 rePath.resolvePathsInFiles(
-	glob,
-	function (regexResult, absPathToCurrentFile, callback) {
-		var match = regexResult[1];
+    glob,
+    function (regexResult, absPathToCurrentFile, callback) {
+        var match = regexResult[1];
 
         var memoisedMatches = pathStore.lookup(match, program.threshold);
 
-		console.log('-------------------------------------------');
-		console.log('Current File: ' + absPathToCurrentFile);
-		console.log('The following path does not exist: ' + match);
-		console.log('-------------------------------------------');
+        console.log('-------------------------------------------');
+        console.log('Current File: ' + absPathToCurrentFile);
+        console.log('The following path does not exist: ' + match);
+        console.log('-------------------------------------------');
 
         if (memoisedMatches.length !== 0) {
             if (program.auto) {
@@ -95,11 +95,11 @@ rePath.resolvePathsInFiles(
             promptForNewFile(regexResult, absPathToCurrentFile, callback);
         }
         
-	},
-	function (err, numFilesChanged, matchingFiles) {
-		if (err) throw new Error(err);
-		console.log('Number of files iterated: ' + numFilesChanged);
+    },
+    function (err, numFilesChanged, matchingFiles) {
+        if (err) throw new Error(err);
+        console.log('Number of files iterated: ' + numFilesChanged);
 
-		console.log(matchingFiles);
-	}
+        console.log(matchingFiles);
+    }
 );
