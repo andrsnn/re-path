@@ -38,9 +38,12 @@ function promptForNewFile(regexResult, absPathToCurrentFile, callback) {
                 return callback(null, isFileAtPath, newPath, absNewPath);
             });
         },
-        function (err, newPath, absNewPath) {
+        function (err, newPath, absNewPath, doSkip) {
             if (err) {
                 return callback(err);
+            }
+            else if (doSkip) {
+                return callback(null, regexResult.input);
             }
 
             pathStore.memoise(absNewPath);
