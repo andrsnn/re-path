@@ -2,7 +2,7 @@
   "name": "re-path",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/RePath.js",
   "scripts": {
     "test": "node tasks/setup.js"
   },
@@ -16,9 +16,8 @@
     "lodash": "^4.5.1",
     "shelljs": "^0.6.0"
   },
-  "main": "lib/RePath.js",
   "preferGlobal": "true",
   "bin": {
-    "re-path" : "cli.js"
+    "re-path": "cli.js"
   }
 }
