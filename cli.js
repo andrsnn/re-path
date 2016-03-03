@@ -29,9 +29,10 @@ var rePath = new RePath(absoluteRoot);
 function promptForNewFile(regexResult, absPathToCurrentFile, callback) {
     rePath.utils.promptForNewFile(
         function (newPath, callback) {
-            var absNewPath = rePath.utils.resolvePathFromFile(absPathToCurrentFile, newPath);
+            var absNewPath = rePath.utils.resolvePathFromFile(absPathToCurrentFile, newPath),
+                possiblePaths = rePath.getPossiblePaths(absNewPath);
 
-            rePath.isFileAtPath(absNewPath, function (err, isFileAtPath) {
+            rePath.areFilesAtPaths(possiblePaths, function (err, isFileAtPath) {
                 if (err) {
                     return callback(err);
                 }
